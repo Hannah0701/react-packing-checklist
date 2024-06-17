@@ -1,4 +1,22 @@
-.App {
+* {
+  font-family: acumin-pro, sans-serif;
+  font: acumin-pro, sans-serif;
+  font-style: normal;
+  box-sizing: border-box;
+}
+
+button {
+  border: 3px solid rgb(42, 42, 42);
+  border-radius: 6px;
+  padding: 6px 14px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  background-image: linear-gradient(to right, rgb(16, 16, 16), rgba(33, 33, 33, 0.828));
+}
+
+/* Original app styles */
+/* .App {
   text-align: center;
 }
 
@@ -34,5 +52,217 @@
   }
   to {
     transform: rotate(360deg);
+  }
+} */
+
+/* Original app styles */
+
+
+.header {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  margin-bottom: 10px;
+  padding-inline: 30px;
+  background-color: rgba(209, 205, 205, 0.701);
+  align-items: center;
+  color: rgba(35, 34, 34, 0.768);
+  font-weight: 600;
+}
+
+.header-button {
+  margin-left: 16px;
+}
+
+.header-logo {
+  height: 80%;
+  border-radius: 6px;
+}
+
+.main, .templates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+/* Header with image */
+.main-image-header{
+  padding: 20px;
+  border: 20px;
+  width: 90%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  color: white;
+  
+  background: url(holidaypacking.png), #F7F7F7;
+  background-size: cover;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.template-image-header {
+  padding: 20px;
+  border: 20px;
+  margin: 50px;
+  width: 90%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  color: white;
+  
+  background: url(holidaypacking.png), #F7F7F7;
+  background-size: cover;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+
+}
+
+.main-box, .template-box {
+  display: grid;
+  gap: 50px; 
+  grid-template-columns: repeat(1, 1fr);
+  margin-inline: auto;
+  padding: 20px;
+  padding-bottom: 100px;
+  max-width: 1000px;
+}
+
+.bespoke-box-button {
+  width: 90%;
+  max-height: 500px;
+  padding: 100px;
+  margin: 0;
+  border-radius: 8px;
+  background-color: white;
+  background: url(bespoke.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 4px 4px 8px 2px rgba(161, 161, 161, 0.253);
+}
+
+.preset-box-button {
+  width: 90%;
+  max-height: 500px;
+  padding: 100px;
+  margin: 0;
+  border-radius: 8px;
+  background-color: white;
+  background: url(preset.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 4px 4px 8px 2px rgba(161, 161, 161, 0.253);
+}
+
+@media (min-width: 500px) {
+  .main-box {
+    grid-template-columns: repeat(2, 1fr); 
+    padding-inline: 100px;
+  }
+}
+
+.footer {
+  margin: 0;
+  display: flex;
+  position: fixed;
+  text-align: left;
+  height: 90px;
+  width: 100%;
+  padding: 20px 20px 0;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  background-image: linear-gradient(to right, rgb(16, 16, 16), rgba(33, 33, 33, 0.828));
+  bottom: 0;
+}
+
+.backButton {
+  position: absolute;
+  margin: 0px;
+  margin-left: 20px;
+}
+
+.formPage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  margin-top: 10px;
+  padding: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  margin: 20px;
+  margin-top: 100px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form h1 {
+  text-align: center;
+}
+
+.form h2 {
+  text-align: center;
+}
+
+.form-input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.123);
+}
+
+.form-text {
+  margin: 10px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.form-image-side {
+  margin: 20px;
+  padding: 20px;
+  width: 40%;
+  height: 600px;
+  float: right;
+  color: white;
+  
+  background: url(holidaypacking.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .formPages.backButton {
+    position: absolute;
+    margin: -60px;
+    margin-left: 20px;
+  }
+
+  .form {
+    width: 90%;
+    float: none;
+  }
+
+  .form-image-side {
+    width: 90%;
+    height: 300px;
+    float: none;
   }
 }

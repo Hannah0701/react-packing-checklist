@@ -1,23 +1,81 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react'
+import { Header } from './components/Header';
+import { Main } from './components/Main';
+import { Form } from './components/Form';
+import { Templates } from './components/Templates';
+import { Output } from './components/Output';
+import { Footer } from './components/Footer';
 
 function App() {
+  const [isBespokePage, setIsBespokePage] = useState(false);
+  const [isTemplatesPage, setIsTemplatesPage] = useState(false);
+  const [isOutputPage, setIsOutputPage] = useState(false);
+
+  function goHome() {
+    setIsBespokePage(false)
+    setIsTemplatesPage(false)
+    setIsOutputPage(false)
+  }
+
+  useEffect(() => {
+    if (isBespokePage) {
+      document.title = `Bespoke Packing Checklist Form`
+    } else if (isTemplatesPage) {
+      document.title = 'Preset Packing Checklist Templates'
+    } else if (isOutputPage) {
+      document.title = 'Generated Packing Checklist'
+    } else {
+      document.title = 'Packing Checklist Homepage'
+    }
+  }, [isBespokePage, isTemplatesPage, isOutputPage])
+
+  if (isBespokePage) {
+    return (
+      <div className="App">
+        <Header />
+        <Form  
+          goHome={goHome} 
+          // outputPage={outputPage}
+        />
+        <Footer />
+      </div>
+    )
+  }
+  
+  if (isTemplatesPage) {
+    return (
+      <div className="App">
+        <Header />
+        <Templates  
+          goHome={goHome} 
+          // outputPage={outputPage}
+        />
+        <Footer />
+      </div>
+    )
+  }
+
+  if (isOutputPage) {
+    return (
+      <div className="App">
+        <Header />
+        <Output  
+          goHome={goHome} 
+        />
+        <Footer />
+      </div>
+    )
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Main
+        setIsBespokePage={setIsBespokePage}
+        setIsTemplatesPage={setIsTemplatesPage}
+      />
+      <Footer />
     </div>
   );
 }
