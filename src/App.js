@@ -11,11 +11,13 @@ function App() {
   const [isBespokePage, setIsBespokePage] = useState(false);
   const [isTemplatesPage, setIsTemplatesPage] = useState(false);
   const [isOutputPage, setIsOutputPage] = useState(false);
+  const [sharedData, setSharedData] = useState(null);
 
   function goHome() {
     setIsBespokePage(false)
     setIsTemplatesPage(false)
     setIsOutputPage(false)
+    setSharedData(null)
   }
 
   useEffect(() => {
@@ -30,13 +32,16 @@ function App() {
     }
   }, [isBespokePage, isTemplatesPage, isOutputPage])
 
+  
   if (isBespokePage) {
     return (
       <div className="App">
         <Header />
         <Form  
           goHome={goHome} 
-          // outputPage={outputPage}
+          setIsBespokePage={setIsBespokePage}
+          setIsOutputPage={setIsOutputPage}
+          setSharedData={setSharedData}
         />
         <Footer />
       </div>
@@ -49,7 +54,9 @@ function App() {
         <Header />
         <Templates  
           goHome={goHome} 
-          // outputPage={outputPage}
+          setIsTemplatesPage={setIsTemplatesPage}
+          setIsOutputPage={setIsOutputPage}
+          setSharedData={setSharedData}
         />
         <Footer />
       </div>
@@ -61,7 +68,8 @@ function App() {
       <div className="App">
         <Header />
         <Output  
-          goHome={goHome} 
+          goHome={goHome}
+          sharedData={sharedData}
         />
         <Footer />
       </div>
