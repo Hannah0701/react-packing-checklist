@@ -22,7 +22,7 @@ export const Output = (props) => {
       newPackingList["Clothing"].push(`${durationDividedBy2} x Tops`, `${durationDividedBy2} x Jeans`, `${props.sharedData.duration} x Underwear`, `${props.sharedData.duration} x Socks`, `${durationDividedBy4} x Pyjamas`, `Jacket`, `Dress`, `Shoes`, `Belt`);
       newPackingList["Personal care"].push("Toiletries", "Personal Medications", "General Medications (e.g. painkillers, travel sickness)", "First Aid Kit", "Hairbrush/comb", "Makeup", "Shaving kit", "Deodorant", "Perfume/aftershave", "Moisturiser", "Toothbrush", "Toothpaste", "Shampoo", "Conditioner");
       newPackingList["Important"].push("Passport", "Travel documents (transport, accommodation etc)", "Travel insurance documents", "Money", "Debit/credit cards", "Phone", "Phone Charger", "Maps/Directions", "Travel Guides");
-      newPackingList["Electronics"].push("Adapter", "Camera", "Headphones", "Laptop/Tablet/Kindle/Other electronics");
+      newPackingList["Electronics"].push("Adapter", "Camera", "Headphones", "Laptop", "Tablet", "Chargers for all electronics", "Power bank");
       newPackingList["Food"].push("Snacks for the journey", "Drinks for the journey");
       newPackingList["Entertainment"].push("Book(s)", "Pack of Cards", "Games");
   
