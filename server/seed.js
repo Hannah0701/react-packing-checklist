@@ -2,7 +2,7 @@ const {holidays, holidayMakers} = require('./seedData.js');
 
 const {sequelize} = require('./db');
 // const {Sauce} = require('./models');
-const {Holiday, HolidayMakers} = require('./models');
+const {Holiday, HolidayMaker} = require('./models');
 
 const seed = async () => {
 
@@ -13,7 +13,7 @@ const seed = async () => {
         // insert data
         await Promise.all(holidays.map(holiday => Holiday.create(holiday)));
         
-        await Promise.all(holidayMakers.map(holidayMaker => HolidayMakers.create(holidayMaker)));
+        await Promise.all(holidayMakers.map(holidayMaker => HolidayMaker.create(holidayMaker)));
 
         console.log("db populated!");
     } catch (error) {

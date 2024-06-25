@@ -13,7 +13,7 @@ const HolidayMaker = sequelize.define("holidayMakers", {
 });
 
 HolidayMaker.belongsTo(Holiday, { as: 'holidayMaker' })
-Holiday.hasMany(HolidayMakers, { foreignKey: 'holidayId' })
+Holiday.hasMany(HolidayMaker, { foreignKey: 'holidayId' })
 
 module.exports = {
     db: sequelize,
