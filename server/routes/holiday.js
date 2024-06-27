@@ -3,7 +3,7 @@ const router = express.Router();
 const { Holiday } = require("../models");
 const { check, validationResult } = require("express-validator");
 
-// GET /holidays
+// GET /api/holidays
 router.get("/", async (req, res, next) => {
   try {
     const holidays = await Holiday.findAll();
@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const holidayId = req.params.id; 
-    const holiday = await Item.findByPk(holidayId);
+    const holiday = await Holiday.findByPk(holidayId);
     if (holiday) {
       res.send(holiday);
     } else {
@@ -34,9 +34,9 @@ router.use(express.urlencoded({extended: true}))
 
 //ADD holiday
 router.post("/", [
-  check("destination").notEmpty(options = { ignore_whitespace: true }),
-  check("type").notEmpty(options = { ignore_whitespace: true }),
-  check("duration").notEmpty(options = { ignore_whitespace: true })
+  check("destination").notEmpty({ ignore_whitespace: true }),
+  check("type").notEmpty({ ignore_whitespace: true }),
+  check("duration").notEmpty({ ignore_whitespace: true })
 ],
 async (req,res,next) => {
   try {
@@ -54,8 +54,9 @@ async (req,res,next) => {
 
 //UPDATE Holiday
 router.put("/:id", [
-    check("name").notEmpty(options = { ignore_whitespace: true }),
-    check("age").notEmpty(options = { ignore_whitespace: true })
+  check("destination").notEmpty({ ignore_whitespace: true }),
+  check("type").notEmpty({ ignore_whitespace: true }),
+  check("duration").notEmpty({ ignore_whitespace: true })
 ],
 async (req,res,next) => {
   try {

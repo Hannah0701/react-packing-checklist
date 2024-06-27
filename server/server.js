@@ -1,7 +1,7 @@
-const { db } = require("./server/models");
-const app = require("./server/app.js");
+const { db } = require("./models/index.js");
+const app = require("./app.js");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const init = async () => {
   try {
