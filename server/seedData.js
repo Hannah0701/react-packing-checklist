@@ -2,20 +2,17 @@ module.exports = {
     holidays: [{
             destination: "Paris",
             type: "City",
-            duration: 7,
-            holidayMakerId: 1,
+            duration: 7
         },
         {
             destination: "Barcelona",
             type: "City",
-            duration: 5,
-            holidayMakerId: 2,
+            duration: 5
         },
         {
             destination: "Bali",
             type: "Beach",
-            duration: 14,
-            holidayMakerId: [1, 3]
+            duration: 14
     }],
     holidayMakers: [{
             name: "Alice",
