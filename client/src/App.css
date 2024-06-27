@@ -1,0 +1,390 @@
+* {
+  font-family: acumin-pro, sans-serif;
+  font: acumin-pro, sans-serif;
+  font-style: normal;
+  box-sizing: border-box;
+}
+
+button {
+  border: 3px solid rgb(42, 42, 42);
+  border-radius: 6px;
+  padding: 6px 14px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  background-image: linear-gradient(to right, rgb(16, 16, 16), rgba(33, 33, 33, 0.828));
+}
+
+.header {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  margin-bottom: 10px;
+  padding-inline: 30px;
+  background-color: rgba(209, 205, 205, 0.701);
+  align-items: center;
+  color: rgba(35, 34, 34, 0.768);
+  font-weight: 600;
+}
+
+.header-button {
+  margin-left: 16px;
+}
+
+.header-logo {
+  height: 80%;
+  border-radius: 6px;
+}
+
+.main, .templates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+/* Header with image */
+.main-image-header{
+  padding: 20px;
+  border: 20px;
+  width: 90%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  color: white;
+  
+  background: url(assets/holidaypacking.png), #F7F7F7;
+  background-size: cover;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.template-image-header{
+  padding: 20px;
+  border: 20px;
+  margin: 50px;
+  width: 90%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  color: white;
+  
+  background: url(assets/holidaypacking.png), #F7F7F7;
+  background-size: cover;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+.outputPage {
+  margin: 20px;
+  padding: 20px;
+}
+
+.output {
+  margin: 20px;
+  margin-bottom: 100px;
+  padding: 20px;
+  padding-top: 60px;
+}
+
+.output h1{
+  text-align: center;
+}
+
+.main-box, .templates-box {
+  display: grid;
+  gap: 50px; 
+  grid-template-columns: repeat(1, 1fr);
+  margin-inline: auto;
+  padding: 20px;
+  padding-bottom: 100px;
+  max-width: 1000px;
+}
+
+.bespoke-box-button {
+  width: 90%;
+  max-height: 500px;
+  padding: 100px;
+  margin: 0;
+  border-radius: 8px;
+  background-color: white;
+  background: url(assets/bespoke.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 4px 4px 8px 2px rgba(161, 161, 161, 0.253);
+}
+
+.preset-box-button {
+  width: 90%;
+  max-height: 500px;
+  padding: 100px;
+  margin: 0;
+  border-radius: 8px;
+  background-color: white;
+  background: url(assets/preset.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 4px 4px 8px 2px rgba(161, 161, 161, 0.253);
+}
+
+@media (min-width: 500px) {
+  .main-box {
+    grid-template-columns: repeat(2, 1fr); 
+    padding-inline: 100px;
+  }
+}
+
+.footer {
+  margin: 0;
+  display: flex;
+  position: fixed;
+  text-align: left;
+  height: 90px;
+  width: 100%;
+  padding: 20px 20px 0;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  background-image: linear-gradient(to right, rgb(16, 16, 16), rgba(33, 33, 33, 0.828));
+  bottom: 0;
+}
+
+.backButton {
+  position: absolute;
+  margin: 0px;
+  margin-left: 20px;
+}
+
+.formPage {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  margin-top: 10px;
+  margin-bottom: 100px;
+  padding: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  margin: 20px;
+  margin-top: 80px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.form h1 {
+  text-align: center;
+}
+
+.form h2 {
+  text-align: center;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-image-side {
+  margin: 20px;
+  padding: 20px;
+  width: 40%;
+  height: 1110px;
+  float: right;
+  color: white;
+  
+  background: url(assets/holidaypacking.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .formPage {
+    flex-direction: column;
+  }
+  
+  .form {
+    width: 90%;
+    float: none;
+  }
+
+  .form-image-side {
+    width: 90%;
+    height: 300px;
+    float: none;
+  }
+}
+
+.template {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-inline: 20px;
+  max-width: 1000px;
+  margin-inline: auto;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.adventure-box-button {
+  width: 100%;
+  min-height: 200px;
+  justify-self: center;
+  background: url(assets/adventure.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+}
+
+.camping-box-button {
+  width: 100%;
+  min-height: 200px;
+  justify-self: center;
+  background: url(assets/camping.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+}
+
+.city-box-button {
+  width: 100%;
+  min-height: 200px;
+  justify-self: center;
+  background: url(assets/city.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+}
+
+.beach-box-button {
+  width: 100%;
+  min-height: 200px;
+  justify-self: center;
+  background: url(assets/beach.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+}
+
+.month-box-button {
+  width: 100%;
+  min-height: 200px;
+  justify-self: center;
+  background: url(assets/onemonth.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+}
+
+.two-to-four-box-button {
+  width: 100%;
+  min-height: 200px;
+  justify-self: center;
+  background: url(assets/twoday.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+}
+
+.week-box-button {
+  width: 100%;
+  min-height: 200px;
+  justify-self: center;
+  background: url(assets/oneweek.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+}
+
+.two-week-box-button {
+  width: 100%;
+  min-height: 200px;
+  justify-self: center;
+  background: url(assets/twoweek.png), #F7F7F7;
+  background-size: cover;
+  background-position: center;
+}
+
+.template-details {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .templates-box {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    padding-inline: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .templates-box {
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: start;
+    padding-inline: 40px;
+  }
+}
+
+.output-individual-packing-list h2 {
+  text-align: center;
+}
+
+.output-individual-packing-list {
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  margin-inline: auto;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(109, 15, 64, 0.25);
+}
+
+.output-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: space-between;
+  
+}
+
+.output-category {
+  width: 400px;
+  height: 100%;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.output-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+input[type="checkbox"] {
+  width: 10%;
+  position: relative; 
+  accent-color: rgb(181, 39, 86);
+}
+
+label {
+  width: 90%;
+  padding:2px;
+  vertical-align: center; 
+  text-align: left;
+  position: relative; 
+}
+
