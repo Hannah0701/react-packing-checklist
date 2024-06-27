@@ -1,59 +1,79 @@
 import React, { useState } from 'react'
+import apiURL from '../api'
 
 export const Form = (props) => {
     const [numPeople, setNumPeople] = useState(1);
     const [data, setData] = useState({
         destination: '',
-        numPeople: '',
-        people: [{name: '', age: ''}],
+        numPeople: numPeople,
+        holidayMakers: [{
+          name: '', 
+          age: ''
+        }],
         holidayType: '',
         duration: '',
     })
 
-    function handleChange(event) {
-        setData({
-            ...data,
-            [event.target.name]: event.target.value
-        })
-    }
+    const handleChange = (event) => {
+      setData({
+          ...data,
+          [event.target.name]: event.target.value
+      });
+    };
 
-    const handleSubmit = (event) => {
+    const handleHolidayMakerChange = (index, e) => {
+      const newHolidayMakers = [...data.holidayMakers];
+      newHolidayMakers[index][e.target.name] = e.target.value;
+      setData({
+        ...data,
+        holidayMakers: newHolidayMakers,
+      });
+    };
+  
+    // const addHolidayMaker = () => {
+    //   setData({
+    //     ...data,
+    //     holidayMakers: [...data.holidayMakers, { name: '', age: '' }],
+    //   });
+    // };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
         props.setIsBespokePage(false);
         props.setIsOutputPage(true);
         props.setSharedData(data);
+
+        const response = await fetch(`${apiURL}/holidays`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+          console.log('Failed to create holiday and holiday makers');
+        } else {
+          console.log('Holiday and holiday makers created');
+        }
     };
 
     const handleNumPeopleChange = (e) => {
         const newNumPeople = parseInt(e.target.value);
         setNumPeople(newNumPeople);
     
-        if (newNumPeople > data.people.length) {
-          const diff = newNumPeople - data.people.length;
-          const newPeople = [...data.people];
+        if (newNumPeople > data.holidayMakers.length) {
+          const diff = newNumPeople - data.holidayMakers.length;
+          const newholidayMakers = [...data.holidayMakers];
     
           for (let i = 1; i <= diff; i++) {
-            newPeople.push({ name: "", age: "" });
+            newholidayMakers.push({ name: "", age: "" });
           }
     
-          setData({ ...data, people: newPeople });
+          setData({ ...data, holidayMakers: newholidayMakers });
         } else {
-          setData({ ...data, people: data.people.slice(0, newNumPeople) });
+          setData({ ...data, holidayMakers: data.people.slice(0, newNumPeople) });
         }
     };
-
-    const handleNameChange = (e, index) => {
-        const newPeople = [...data.people];
-        newPeople[index].name = e.target.value;
-        setData({ ...data, people: newPeople });
-    };
-
-    const handleAgeChange = (e, index) => {
-        const newPeople = [...data.people];
-        newPeople[index].age = e.target.value;
-        setData({ ...data, people: newPeople });
-    };
-    
 
   return (
     <div className="formPage">
@@ -96,22 +116,22 @@ export const Form = (props) => {
                         required
                       />
                   </p>
-                  {data.people.map((person, index) => (
+                  {data.holidayMakers.map((maker, index) => (
                     <div className="people" key={index}>
                       <p>Person {index + 1} details</p>
                       <input
                         type="text"
                         name="name"
-                        value={person.name}
-                        onChange={(e) => handleNameChange(e, index)}
+                        value={maker.name}
+                        onChange={(e) => handleHolidayMakerChange(e, index)}
                         placeholder={`Person ${index + 1} name`}
                         required
                       />
                       <input
                         type="number"
                         name="age"
-                        value={person.age}
-                        onChange={(e) => handleAgeChange(e, index)}
+                        value={maker.age}
+                        onChange={(e) => handleHolidayMakerChange(e, index)}
                         placeholder={`Person ${index + 1} age`}
                         required
                       />
@@ -125,7 +145,7 @@ export const Form = (props) => {
                         type="text" 
                         name="holidayType" 
                         id="holidayType" 
-                        value={data.type_of_hol}
+                        value={data.holidayType}
                         onChange={handleChange} 
                         required
                       >
@@ -150,7 +170,7 @@ export const Form = (props) => {
                         required
                       />
                   </p>
-                  <button type="submit">Generate Checklist</button>
+                  <button type="submit">{'Generate Checklist'}</button>
                 </div>
               </form>
         </div>

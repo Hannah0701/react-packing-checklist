@@ -53,7 +53,7 @@ export const Output = (props) => {
     // };
 
     return (
-      <div classname="outputPage">
+      <div className="outputPage">
         <button 
         type="button"
         className="backButton" 
@@ -80,7 +80,7 @@ export const Output = (props) => {
                             value={item}
                             // onChange={handleSelect}
                           />
-                          <label for={index}>{item}</label>
+                          <label htmlFor={index}>{item}</label>
                         </div>
                       ))}
                     </div>

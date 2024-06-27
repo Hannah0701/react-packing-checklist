@@ -1,17 +1,17 @@
 module.exports = {
     holidays: [{
             destination: "Paris",
-            type: "City",
+            holidayType: "City",
             duration: 7
         },
         {
             destination: "Barcelona",
-            type: "City",
+            holidayType: "City",
             duration: 5
         },
         {
             destination: "Bali",
-            type: "Beach",
+            holidayType: "Beach",
             duration: 14
     }],
     holidayMakers: [{
