@@ -3,7 +3,7 @@ const router = express.Router();
 const { Holiday } = require("../models");
 const { check, validationResult } = require("express-validator");
 
-// GET /holidays
+// GET /api/holidays
 router.get("/", async (req, res, next) => {
   try {
     const holidays = await Holiday.findAll();

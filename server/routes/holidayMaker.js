@@ -17,11 +17,11 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const holidayMakerId = req.params.id; 
-    const holidayMaker = await Item.findByPk(holidayMakerId);
+    const holidayMaker = await HolidayMaker.findByPk(holidayMakerId);
     if (holidayMaker) {
       res.send(holidayMaker);
     } else {
-      res.status(404).send({ error: "Item not found"});
+      res.status(404).send({ error: "Holiday Maker not found"});
     }
   }
    catch (error) {
@@ -34,8 +34,8 @@ router.use(express.urlencoded({extended: true}))
 
 //ADD holidayMaker
 router.post("/", [
-  check("name").notEmpty(options = { ignore_whitespace: true }),
-  check("age").notEmpty(options = { ignore_whitespace: true })
+  check("name").notEmpty({ ignore_whitespace: true }),
+  check("age").notEmpty({ ignore_whitespace: true })
 ],
 async (req,res,next) => {
   try {
@@ -53,8 +53,8 @@ async (req,res,next) => {
 
 //UPDATE HolidayMaker
 router.put("/:id", [
-    check("name").notEmpty(options = { ignore_whitespace: true }),
-    check("age").notEmpty(options = { ignore_whitespace: true })
+    check("name").notEmpty({ ignore_whitespace: true }),
+    check("age").notEmpty({ ignore_whitespace: true })
 ],
 async (req,res,next) => {
   try {

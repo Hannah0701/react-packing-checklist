@@ -12,8 +12,8 @@ const HolidayMaker = sequelize.define("holidayMakers", {
     age: Sequelize.INTEGER,
 });
 
-Holiday.hasMany(HolidayMaker)
-HolidayMaker.belongsTo(Holiday)
+Holiday.belongsToMany(HolidayMaker, {through: 'holidayHolidayMaker'})
+HolidayMaker.belongsToMany(Holiday, {through: 'holidayHolidayMaker'})
 
 module.exports = {
     db: sequelize,

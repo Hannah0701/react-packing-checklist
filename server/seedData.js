@@ -13,7 +13,6 @@ module.exports = {
             destination: "Bali",
             type: "Beach",
             duration: 14
-
     }],
     holidayMakers: [{
             name: "Alice",
