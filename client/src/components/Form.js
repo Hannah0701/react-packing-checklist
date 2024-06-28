@@ -10,7 +10,7 @@ export const Form = (props) => {
           name: '', 
           age: ''
         }],
-        holidayType: '',
+        holidayType: 'beach',
         duration: '',
     })
 
