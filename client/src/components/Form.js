@@ -21,7 +21,7 @@ export const Form = (props) => {
       });
     };
 
-    const handleHolidayMakerChange = (index, e) => {
+    const handleHolidayMakerChange = (e, index) => {
       const newHolidayMakers = [...data.holidayMakers];
       newHolidayMakers[index][e.target.name] = e.target.value;
       setData({
