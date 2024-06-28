@@ -5,7 +5,6 @@ export const Form = (props) => {
     const [numPeople, setNumPeople] = useState(1);
     const [data, setData] = useState({
         destination: '',
-        numPeople: numPeople,
         holidayMakers: [{
           name: '', 
           age: ''
@@ -63,15 +62,15 @@ export const Form = (props) => {
     
         if (newNumPeople > data.holidayMakers.length) {
           const diff = newNumPeople - data.holidayMakers.length;
-          const newholidayMakers = [...data.holidayMakers];
+          const newHolidayMakers = [...data.holidayMakers];
     
           for (let i = 1; i <= diff; i++) {
-            newholidayMakers.push({ name: "", age: "" });
+            newHolidayMakers.push({ name: "", age: "" });
           }
     
-          setData({ ...data, holidayMakers: newholidayMakers });
+          setData({ ...data, holidayMakers: newHolidayMakers });
         } else {
-          setData({ ...data, holidayMakers: data.people.slice(0, newNumPeople) });
+          setData({ ...data, holidayMakers: data.holidayMakers.slice(0, newNumPeople) });
         }
     };
 

@@ -63,9 +63,9 @@ export const Output = (props) => {
         </button>
         <div className="output">
           <h1>Packing Checklist for {props.sharedData.destination}</h1>
-          {props.sharedData.people.map((person, index) => (
+          {props.sharedData.holidayMakers.map((holidayMaker, index) => (
             <div className="output-individual-packing-list" key={index}>
-              <h2>Checklist for {person.name}:</h2>
+              <h2>Checklist for {holidayMaker.name}:</h2>
               <div className="output-category-list">
                 {Object.keys(packingList).map(category => (
                   <div className="output-category" key={category}>
