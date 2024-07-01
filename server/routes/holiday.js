@@ -2,12 +2,15 @@ const express = require("express");
 const router = express.Router();
 const { Holiday } = require("../models");
 const { check, validationResult } = require("express-validator");
-const { where } = require("sequelize");
 
 // GET holiday with holidayMakers /api/holidays
 router.get("/", async (req, res, next) => {
   try {
     const holidays = await Holiday.findAll();
+    // await Promise.all(holidays.map(async (holiday) => {
+    //   holiday.holidayMakers = await holiday.getHolidayMakers();
+    // }));
+
     res.send(holidays);
   } catch (error) {
     next(error);

@@ -8,6 +8,7 @@ import apiURL from '../api';
 
 export const Holidays = (props) => {
   const [holidays, setHolidays] = useState([]);
+//   const [holidayMakers, setHolidayMakers] = useState([]);
 
   async function fetchHolidays(){
       try {
@@ -23,6 +24,28 @@ export const Holidays = (props) => {
       }
   }
 
+  async function deleteHoliday (holidayId) {
+    try {
+      const res = await fetch(`${apiURL}/holidays/${holidayId}`, {
+        method: 'DELETE'
+      })
+      await res.json()
+      fetchHolidays()
+
+    } catch (err) {
+      console.log('Oh no an error! ', err)
+    }
+  }
+
+  function confirmDelete(id) {
+		// Returns true if the user presses OK, otherwise false
+		const confirmed = window.confirm("Are you sure you want to delete this holiday data?");
+
+		if (confirmed) {
+			deleteHoliday(id);
+		}
+	}
+
   useEffect(() => {
       fetchHolidays();
   } ,[]);
@@ -36,15 +59,16 @@ export const Holidays = (props) => {
       >
           Go back
       </button>
-      <button 
+      {/* <button 
           className='refreshButton' 
           onClick={fetchHolidays}
       >
           Refresh Database
-      </button>
+      </button> */}
       <main className='content'>
         <div className="page-image-header">
           <h1>Holidays Database</h1>
+          <p>Access to all your stored holiday data ready to regenerate your checklist, edit or delete your input!</p>
         </div>
         <div className="holidays">
           <div className="holiday-box">
@@ -65,19 +89,39 @@ export const Holidays = (props) => {
               return (
                 <div className="holiday" key={holiday.id}>
                   <div className="holiday-image">
-                    <img className="holiday-img" src={imageType} alt="Holiday type image" id="icon" width="200px" height="200px" border-radius="20px" />
+                    <img className="holiday-img" src={imageType} alt="Holiday type" id="icon" width="200px" height="200px" border-radius="20px" />
                   </div>
                   <div className="holiday-details">
                     <h2>{holiday.destination}</h2>
                     <p>{holiday.duration} days</p>
-                    {/* <div className="holidayMakers">
-                        {holiday[holiday.id].holidayMaker.map(holidayMaker => (
+                    <div className="holidayMakers">
+                        {/* {holiday.holidayMakers.map(holidayMaker => (
                             <div key={holidayMaker.id}>
                                 <li>{holidayMaker.name}</li>
                                 <li>{holidayMaker.age}</li>
                             </div>
-                        ))}
-                    </div> */}
+                        ))} */}
+                    </div>
+                  </div>
+                  <div className="holiday-buttons">
+                    <button 
+                      className='viewButton' 
+                      onClick={() => props.viewHoliday(holiday)}
+                    >
+                        View checklist
+                    </button>
+                    <button 
+                      className='editButton' 
+                      onClick={() => props.editHoliday(holiday)}
+                    >
+                        Edit
+                    </button>
+                    <button 
+                      className='deleteButton' 
+                      onClick={() => confirmDelete(holiday.id)}
+                    >
+                        Delete
+                    </button>
                   </div>
                 </div>
               );
