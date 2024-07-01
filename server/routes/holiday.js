@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { Holiday } = require("../models");
 const { check, validationResult } = require("express-validator");
+const { where } = require("sequelize");
 
-// GET /api/holidays
+// GET holiday with holidayMakers /api/holidays
 router.get("/", async (req, res, next) => {
   try {
     const holidays = await Holiday.findAll();

@@ -28,13 +28,6 @@ export const Form = (props) => {
         holidayMakers: newHolidayMakers,
       });
     };
-  
-    // const addHolidayMaker = () => {
-    //   setData({
-    //     ...data,
-    //     holidayMakers: [...data.holidayMakers, { name: '', age: '' }],
-    //   });
-    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();

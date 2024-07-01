@@ -53,7 +53,7 @@ export const Output = (props) => {
     // };
 
     return (
-      <div className="outputPage">
+      <div className="output">
         <button 
         type="button"
         className="backButton" 
@@ -61,8 +61,11 @@ export const Output = (props) => {
         >
             Go back
         </button>
-        <div className="output">
-          <h1>Packing Checklist for {props.sharedData.destination}</h1>
+        <div className="outputPage">
+          <div className="page-image-header">
+             <h1>Packing Checklist for {props.sharedData.destination}</h1>
+          </div>
+          <div className="output-content">
           {props.sharedData.holidayMakers.map((holidayMaker, index) => (
             <div className="output-individual-packing-list" key={index}>
               <h2>Checklist for {holidayMaker.name}:</h2>
@@ -91,5 +94,6 @@ export const Output = (props) => {
           ))}
         </div>
       </div>
+    </div>
     );
 }

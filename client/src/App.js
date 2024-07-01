@@ -6,17 +6,44 @@ import { Form } from './components/Form';
 import { Templates } from './components/Templates';
 import { Output } from './components/Output';
 import { Footer } from './components/Footer';
+import { Holidays } from './components/Holidays';
+import apiURL from './api';
 
 function App() {
   const [isBespokePage, setIsBespokePage] = useState(false);
   const [isTemplatesPage, setIsTemplatesPage] = useState(false);
   const [isOutputPage, setIsOutputPage] = useState(false);
+  const [isHolidaysPage, setIsHolidaysPage] = useState(false);
   const [sharedData, setSharedData] = useState(null);
+  const [holidays, setHolidays] = useState([]);
+
+  async function fetchHolidays(){
+      try {
+          const response = await fetch(`${apiURL}/holidays`);
+  
+    if (!response.ok) {
+      throw new Error('Failed to fetch items');
+    }
+          const holidayData = await response.json();
+          setHolidays(holidayData);
+      } catch (err) {
+          console.log("Oh no an error! ", err)
+      }
+  }
 
   function goHome() {
     setIsBespokePage(false)
     setIsTemplatesPage(false)
     setIsOutputPage(false)
+    setIsHolidaysPage(false)
+    setSharedData(null)
+  }
+
+  function goToHolidays() {
+    setIsBespokePage(false)
+    setIsTemplatesPage(false)
+    setIsOutputPage(false)
+    setIsHolidaysPage(true)
     setSharedData(null)
   }
 
@@ -27,16 +54,20 @@ function App() {
       document.title = 'Preset Packing Checklist Templates'
     } else if (isOutputPage) {
       document.title = 'Generated Packing Checklist'
+    } else if (isHolidaysPage) {
+      document.title = 'Holidays Database'
     } else {
       document.title = 'Packing Checklist Homepage'
     }
-  }, [isBespokePage, isTemplatesPage, isOutputPage])
-
+  }, [isBespokePage, isTemplatesPage, isOutputPage, isHolidaysPage])
   
   if (isBespokePage) {
     return (
       <div className="App">
-        <Header />
+        <Header 
+          goToHolidays={goToHolidays}
+          holidays={holidays}
+        />
         <Form  
           goHome={goHome} 
           setIsBespokePage={setIsBespokePage}
@@ -51,7 +82,10 @@ function App() {
   if (isTemplatesPage) {
     return (
       <div className="App">
-        <Header />
+        <Header 
+          goToHolidays={goToHolidays}
+          holidays={holidays}
+        />
         <Templates  
           goHome={goHome} 
           setIsTemplatesPage={setIsTemplatesPage}
@@ -66,7 +100,10 @@ function App() {
   if (isOutputPage) {
     return (
       <div className="App">
-        <Header />
+        <Header 
+          goToHolidays={goToHolidays}
+          holidays={holidays}
+        />
         <Output  
           goHome={goHome}
           sharedData={sharedData}
@@ -75,10 +112,29 @@ function App() {
       </div>
     )
   }
+
+  if (isHolidaysPage) {
+    return (
+      <div className="App">
+        <Header 
+          goToHolidays={goToHolidays}
+          holidays={holidays}
+        />
+        <Holidays  
+          goHome={goHome}
+          fetchHolidays={fetchHolidays}
+        />
+        <Footer />
+      </div>
+    )
+  }
   
   return (
     <div className="App">
-      <Header />
+      <Header 
+          goToHolidays={goToHolidays}
+          holidays={holidays}
+      />
       <Main
         setIsBespokePage={setIsBespokePage}
         setIsTemplatesPage={setIsTemplatesPage}

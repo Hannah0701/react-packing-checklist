@@ -108,7 +108,7 @@ export const Templates = (props) => {
               Go back
           </button>
           <div className="templates">
-            <div className="template-image-header">
+            <div className="page-image-header">
               <h1>Preset Checklists</h1>
               <p>Checklists already designed for specific occasions!</p>
             </div>
