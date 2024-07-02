@@ -6,7 +6,39 @@ import { Holiday } from './Holiday';
 export const Holidays = (props) => {
   const [holidays, setHolidays] = useState([]);
 
-  async function deleteHoliday (holidayId) {
+  async function viewChecklist(holidayId) {
+    try {
+      const resHoliday = await fetch(`${apiURL}/holidays/${holidayId}`, {
+        method: 'GET'
+      })
+      if (resHoliday.ok) {
+        const resHolidayMakers = await fetch(`${apiURL}/holidays/${holidayId}/holidayMakers`, {
+            method: 'GET'
+        })
+        if (resHolidayMakers.ok) {
+            const holidayData = await resHoliday.json();
+            const holidayMakersData = await resHolidayMakers.json();
+            const holidayDataWithMakers = {...holidayData, holidayMakers: holidayMakersData};
+            props.setSharedData({
+                destination: holidayDataWithMakers.destination,
+                holidayMakers: holidayDataWithMakers.holidayMakers,
+                holidayType: holidayDataWithMakers.holidayType,
+                duration: holidayDataWithMakers.duration
+            });
+            props.setIsHolidaysPage(false);
+            props.setIsOutputPage(true);
+        } else {
+            throw new Error('Failed to fetch items');
+        }
+      } else { 
+          throw new Error('Failed to fetch items');
+      }
+    } catch (err) {
+      console.log('Oh no an error! ', err)
+    }
+  }
+
+  async function deleteHoliday(holidayId) {
     try {
       const res = await fetch(`${apiURL}/holidays/${holidayId}`, {
         method: 'DELETE'
@@ -73,7 +105,14 @@ export const Holidays = (props) => {
         </div>
         <div className="holidays">
           <div className="holiday-box">
-            {holidays.map(holiday => <Holiday holiday={holiday} confirmDelete={confirmDelete} />)}
+            {holidays.map(holiday => <Holiday holiday={holiday} 
+                                              confirmDelete={confirmDelete} 
+                                              viewChecklist={viewChecklist} 
+                                              setIsOutputPage={props.setIsOutputPage} 
+                                              setIsHolidaysPage={props.setIsHolidaysPage} 
+                                              setSharedData={props.setSharedData}
+                                              key={"holiday" + holiday.id}
+            />)}
           </div>
         </div>
       </main>

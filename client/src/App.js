@@ -123,6 +123,9 @@ function App() {
         <Holidays  
           goHome={goHome}
           fetchHolidays={fetchHolidays}
+          setSharedData={setSharedData}
+          setIsHolidaysPage={setIsHolidaysPage}
+          setIsOutputPage={setIsOutputPage}
         />
         <Footer />
       </div>
