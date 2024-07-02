@@ -37,7 +37,7 @@ button {
   border-radius: 6px;
 }
 
-.main, .templates {
+.main, .templates, .content, .outputPage, .holidays {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,7 +62,7 @@ button {
   border-radius: 20px;
 }
 
-.template-image-header{
+.page-image-header{
   padding: 20px;
   border: 20px;
   margin: 50px;
@@ -79,20 +79,10 @@ button {
   border-radius: 20px;
 }
 
-.outputPage {
-  margin: 20px;
-  padding: 20px;
-}
-
-.output {
+.output-content {
   margin: 20px;
   margin-bottom: 100px;
   padding: 20px;
-  padding-top: 60px;
-}
-
-.output h1{
-  text-align: center;
 }
 
 .main-box, .templates-box {
@@ -103,6 +93,16 @@ button {
   padding: 20px;
   padding-bottom: 100px;
   max-width: 1000px;
+}
+
+.holiday-box {
+  display: grid;
+  gap: 50px; 
+  grid-template-columns: repeat(1, 1fr);
+  margin-inline: auto;
+  padding: 20px;
+  padding-bottom: 100px;
+  max-width: auto;
 }
 
 .bespoke-box-button {
@@ -157,6 +157,17 @@ button {
   position: absolute;
   margin: 0px;
   margin-left: 20px;
+}
+
+.refreshButton {
+  position: absolute;
+  margin: 0px;
+  margin-right: 40px;
+  right: 0;
+}
+
+.holiday-page {
+  padding: 20px;
 }
 
 .formPage {
@@ -232,7 +243,7 @@ input, select {
   }
 }
 
-.template {
+.template, .holiday {
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
@@ -322,7 +333,7 @@ input, select {
 }
 
 @media (min-width: 768px) {
-  .templates-box {
+  .templates-box, .holiday-box {
     grid-template-columns: 1fr 1fr;
     align-items: start;
     padding-inline: 40px;
@@ -330,22 +341,24 @@ input, select {
 }
 
 @media (min-width: 1024px) {
-  .templates-box {
+  .templates-box, .holiday-box {
     grid-template-columns: 1fr 1fr 1fr;
     align-items: start;
     padding-inline: 40px;
   }
-}
 
-.output-individual-packing-list h2 {
-  text-align: center;
+  .output-category {
+    width: 400px;
+    height: 100%;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .output-individual-packing-list {
   text-align: center;
-  margin: 20px;
-  padding: 20px;
-  margin-inline: auto;
   border-radius: 20px;
   box-shadow: 0px 4px 4px rgba(109, 15, 64, 0.25);
 }
@@ -360,7 +373,7 @@ input, select {
 }
 
 .output-category {
-  width: 400px;
+  width: 240px;
   height: 100%;
   margin: 20px;
   padding: 20px;
@@ -388,3 +401,63 @@ label {
   position: relative; 
 }
 
+.holiday-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.holiday-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.holiday-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  margin-left: 0px;
+  margin-right: 0px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(109, 15, 64, 0.25);
+}
+
+.holiday-buttons {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.editButton, .deleteButton {
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 6px 14px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  background-image: linear-gradient(to right, rgba(247, 73, 168, 0.828), rgb(247, 176, 114));
+}
+
+.holidayMakers {
+  display: flex;
+  padding-inline: 10px;
+  margin-inline: auto;
+}
+
+.holidayMaker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(242, 149, 68, 0.25);
+}

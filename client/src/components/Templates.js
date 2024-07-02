@@ -8,8 +8,7 @@ export const Templates = (props) => {
         props.setIsOutputPage(true);
         props.setSharedData({
             destination: 'Anywhere',
-            numPeople: '1',
-            people: [{name: '2-4 Days', age: '40'}],
+            holidayMakers: [{name: '2-4 Days', age: '40'}],
             holidayType: 'beach',
             duration: '4',
         });
@@ -21,8 +20,7 @@ export const Templates = (props) => {
         props.setIsOutputPage(true);
         props.setSharedData({
             destination: 'Anywhere',
-            numPeople: '1',
-            people: [{name: '1 Week', age: '40'}],
+            holidayMakers: [{name: '1 Week', age: '40'}],
             holidayType: 'beach',
             duration: '7',
         });
@@ -34,8 +32,7 @@ export const Templates = (props) => {
         props.setIsOutputPage(true);
         props.setSharedData({
             destination: 'Anywhere',
-            numPeople: '1',
-            people: [{name: '2 Weeks', age: '40'}],
+            holidayMakers: [{name: '2 Weeks', age: '40'}],
             holidayType: 'beach',
             duration: '14',
         });
@@ -47,8 +44,7 @@ export const Templates = (props) => {
         props.setIsOutputPage(true);
         props.setSharedData({
             destination: 'Anywhere',
-            numPeople: '1',
-            people: [{name: '1 Month', age: '40'}],
+            holidayMakers: [{name: '1 Month', age: '40'}],
             holidayType: 'beach',
             duration: '30',
         });
@@ -60,8 +56,7 @@ export const Templates = (props) => {
         props.setIsOutputPage(true);
         props.setSharedData({
             destination: 'Anywhere',
-            numPeople: '1',
-            people: [{name: 'City break', age: '40'}],
+            holidayMakers: [{name: 'City break', age: '40'}],
             holidayType: 'city',
             duration: '5',
         });
@@ -73,8 +68,7 @@ export const Templates = (props) => {
         props.setIsOutputPage(true);
         props.setSharedData({
             destination: 'Anywhere',
-            numPeople: '1',
-            people: [{name: 'Camping Holiday', age: '40'}],
+            holidayMakers: [{name: 'Camping Holiday', age: '40'}],
             holidayType: 'camping',
             duration: '10',
         });
@@ -86,8 +80,7 @@ export const Templates = (props) => {
         props.setIsOutputPage(true);
         props.setSharedData({
             destination: 'Anywhere',
-            numPeople: '1',
-            people: [{name: 'Beach / Resort Holiday', age: '40'}],
+            holidayMakers: [{name: 'Beach / Resort Holiday', age: '40'}],
             holidayType: 'beach',
             duration: '14',
         });
@@ -99,8 +92,7 @@ export const Templates = (props) => {
         props.setIsOutputPage(true);
         props.setSharedData({
             destination: 'Anywhere',
-            numPeople: '1',
-            people: [{name: 'Adventure Holiday', age: '40'}],
+            holidayMakers: [{name: 'Adventure Holiday', age: '40'}],
             holidayType: 'adventure',
             duration: '14',
         });
@@ -116,14 +108,14 @@ export const Templates = (props) => {
               Go back
           </button>
           <div className="templates">
-            <div className="template-image-header">
+            <div className="page-image-header">
               <h1>Preset Checklists</h1>
               <p>Checklists already designed for specific occasions!</p>
             </div>
             <div className="templates-box">
               <div className="template">  
                 <div className='two-to-four-checklist-box'>
-                  <button className="two-to-four-box-button" onClick={handleClickTwoDay}></button>
+                  <button className="two-to-four-box-button" onClick={handleClickTwoDay} width="150px" height="150px" border-radius="20px" ></button>
                   <div className="template-details">
                     <h3>2-4 Day Checklist</h3>
                     <p>Generic 2 - 4 day holiday packing checklist</p>

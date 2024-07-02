@@ -53,7 +53,7 @@ export const Output = (props) => {
     // };
 
     return (
-      <div classname="outputPage">
+      <div className="output">
         <button 
         type="button"
         className="backButton" 
@@ -61,11 +61,14 @@ export const Output = (props) => {
         >
             Go back
         </button>
-        <div className="output">
-          <h1>Packing Checklist for {props.sharedData.destination}</h1>
-          {props.sharedData.people.map((person, index) => (
+        <div className="outputPage">
+          <div className="page-image-header">
+             <h1>Packing Checklist for {props.sharedData.destination}</h1>
+          </div>
+          <div className="output-content">
+          {props.sharedData.holidayMakers.map((holidayMaker, index) => (
             <div className="output-individual-packing-list" key={index}>
-              <h2>Checklist for {person.name}:</h2>
+              <h2>Checklist for {holidayMaker.name}:</h2>
               <div className="output-category-list">
                 {Object.keys(packingList).map(category => (
                   <div className="output-category" key={category}>
@@ -80,7 +83,7 @@ export const Output = (props) => {
                             value={item}
                             // onChange={handleSelect}
                           />
-                          <label for={index}>{item}</label>
+                          <label htmlFor={index}>{item}</label>
                         </div>
                       ))}
                     </div>
@@ -91,5 +94,6 @@ export const Output = (props) => {
           ))}
         </div>
       </div>
+    </div>
     );
 }
