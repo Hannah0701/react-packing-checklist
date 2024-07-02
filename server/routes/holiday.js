@@ -17,6 +17,24 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// /api/holidays/:id/holidayMakers
+router.get("/:id/holidayMakers", async (req, res, next) => {
+  try {
+    const holidayId = req.params.id;
+    const holiday = await Holiday.findByPk(holidayId);
+    if (holiday) {
+      const holidayMakers = await holiday.getHolidayMakers();
+      res.send(holidayMakers);
+    } else {
+      res.status(404).send({ error: "Item not found"});
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// /api/holidayMakers/:id/holidays
+
 // GET /api/holidays/:id
 router.get("/:id", async (req, res, next) => {
   try {

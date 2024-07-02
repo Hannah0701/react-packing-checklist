@@ -1,36 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import city from "../assets/city.png";
-import beach from "../assets/beach.png";
-import camping from "../assets/camping.png";
-import adventure from "../assets/adventure.png";
-import multiDestination from "../assets/multiDestination.png";
+
 import apiURL from '../api';
+import { Holiday } from './Holiday';
 
 export const Holidays = (props) => {
   const [holidays, setHolidays] = useState([]);
-//   const [holidayMakers, setHolidayMakers] = useState([]);
-
-  async function fetchHolidays(){
-      try {
-          const response = await fetch(`${apiURL}/holidays`);
-  
-    if (!response.ok) {
-      throw new Error('Failed to fetch items');
-    }
-          const holidayData = await response.json();
-          setHolidays(holidayData);
-      } catch (err) {
-          console.log("Oh no an error! ", err)
-      }
-  }
 
   async function deleteHoliday (holidayId) {
     try {
       const res = await fetch(`${apiURL}/holidays/${holidayId}`, {
         method: 'DELETE'
       })
-      await res.json()
-      fetchHolidays()
+      if (res.ok) {
+        // keep all the holidays except the one we want to delete
+       const filteredHolidays = holidays.filter(holiday => holiday.id !== holidayId);
+       setHolidays(filteredHolidays);
+      } else {
+        throw new Error('Failed to delete item');
+      }
 
     } catch (err) {
       console.log('Oh no an error! ', err)
@@ -47,6 +34,20 @@ export const Holidays = (props) => {
 	}
 
   useEffect(() => {
+    async function fetchHolidays(){
+      try {
+          const response = await fetch(`${apiURL}/holidays`);
+  
+    if (!response.ok) {
+      throw new Error('Failed to fetch items');
+    }
+          const holidayData = await response.json();
+          setHolidays(holidayData);
+      } catch (err) {
+          console.log("Oh no an error! ", err)
+      }
+  }
+
       fetchHolidays();
   } ,[]);
 
@@ -72,60 +73,7 @@ export const Holidays = (props) => {
         </div>
         <div className="holidays">
           <div className="holiday-box">
-            {holidays.map(holiday => {
-              let imageType;
-              if (holiday.holidayType === "city") {
-                imageType = city;
-              } else if (holiday.holidayType === "camping") {
-                imageType = camping;
-              } else if (holiday.holidayType === "adventure") {
-                imageType = adventure;
-              } else if (holiday.holidayType === "multiDestination") {
-                imageType = multiDestination;
-              } else {
-                imageType = beach;
-              }
-
-              return (
-                <div className="holiday" key={holiday.id}>
-                  <div className="holiday-image">
-                    <img className="holiday-img" src={imageType} alt="Holiday type" id="icon" width="200px" height="200px" border-radius="20px" />
-                  </div>
-                  <div className="holiday-details">
-                    <h2>{holiday.destination}</h2>
-                    <p>{holiday.duration} days</p>
-                    <div className="holidayMakers">
-                        {/* {holiday.holidayMakers.map(holidayMaker => (
-                            <div key={holidayMaker.id}>
-                                <li>{holidayMaker.name}</li>
-                                <li>{holidayMaker.age}</li>
-                            </div>
-                        ))} */}
-                    </div>
-                  </div>
-                  <div className="holiday-buttons">
-                    <button 
-                      className='viewButton' 
-                      onClick={() => props.viewHoliday(holiday)}
-                    >
-                        View checklist
-                    </button>
-                    <button 
-                      className='editButton' 
-                      onClick={() => props.editHoliday(holiday)}
-                    >
-                        Edit
-                    </button>
-                    <button 
-                      className='deleteButton' 
-                      onClick={() => confirmDelete(holiday.id)}
-                    >
-                        Delete
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+            {holidays.map(holiday => <Holiday holiday={holiday} confirmDelete={confirmDelete} />)}
           </div>
         </div>
       </main>
