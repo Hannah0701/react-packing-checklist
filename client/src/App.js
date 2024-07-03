@@ -37,6 +37,7 @@ function App() {
     setIsTemplatesPage(false)
     setIsOutputPage(false)
     setIsHolidaysPage(false)
+    setEditForm(false)
     setSharedData(null)
   }
 
@@ -45,6 +46,7 @@ function App() {
     setIsTemplatesPage(false)
     setIsOutputPage(false)
     setIsHolidaysPage(true)
+    setEditForm(false)
     setSharedData(null)
   }
 

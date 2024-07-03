@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import apiURL from '../api';
 import { Holiday } from './Holiday';
+import { EditForm } from './EditForm';
 
 export const Holidays = (props) => {
   const [holidays, setHolidays] = useState([]);
@@ -114,6 +115,21 @@ export const Holidays = (props) => {
       fetchHolidays();
   } ,[]);
 
+  if (props.editForm) {
+    return (
+      <div className="editform-container">
+      {holidays.map(holiday =>
+        <EditForm holiday={holiday}
+                setEditForm={props.setEditForm}
+                sharedData={props.sharedData}
+                setSharedData={props.setSharedData}
+                key={"editForm" + holiday.id}
+        />
+       )}
+      </div>
+    )
+  }
+
   return ( 
     <div className="holiday-page">
       <button 
@@ -123,12 +139,6 @@ export const Holidays = (props) => {
       >
           Go back
       </button>
-      {/* <button 
-          className='refreshButton' 
-          onClick={fetchHolidays}
-      >
-          Refresh Database
-      </button> */}
       <main className='content'>
         <div className="page-image-header">
           <h1>Holidays Database</h1>
@@ -136,15 +146,17 @@ export const Holidays = (props) => {
         </div>
         <div className="holidays">
           <div className="holiday-box">
-            {holidays.map(holiday => <Holiday holiday={holiday} 
-                                              confirmDelete={confirmDelete} 
-                                              viewChecklist={viewChecklist} 
-                                              editHoliday={editHoliday}
-                                              setIsOutputPage={props.setIsOutputPage} 
-                                              setIsHolidaysPage={props.setIsHolidaysPage} 
-                                              setSharedData={props.setSharedData}
-                                              key={"holiday" + holiday.id}
-            />)}
+            {holidays.map(holiday => 
+            <Holiday holiday={holiday} 
+                     confirmDelete={confirmDelete} 
+                     viewChecklist={viewChecklist} 
+                     editHoliday={editHoliday}
+                     setIsOutputPage={props.setIsOutputPage} 
+                     setIsHolidaysPage={props.setIsHolidaysPage} 
+                     setSharedData={props.setSharedData}
+                     key={"holiday" + holiday.id}
+            />
+          )}
           </div>
         </div>
       </main>

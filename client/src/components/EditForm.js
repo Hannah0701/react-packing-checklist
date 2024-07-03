@@ -17,7 +17,7 @@ export const EditForm = (props) => {
         // Fetch the holiday data and prepopulate the form
         const fetchHolidayData = async () => {
             try {
-                const response = await fetch(`${apiURL}/holidays/${props.holidayId}`);
+                const response = props.sharedData
                 if (response.ok) {
                     const holidayData = await response.json();
                     setData(holidayData);
@@ -31,7 +31,11 @@ export const EditForm = (props) => {
         };
 
         fetchHolidayData();
-    }, [props.holidayId]);
+    }, [props.sharedData]);
+
+    function closeForm() {
+      props.setEditForm(false)
+    }
 
     const handleChange = (event) => {
         setData({
@@ -93,19 +97,19 @@ export const EditForm = (props) => {
 
     return (
         <div className="overlay">
-            <div className="editForm">
+            <div className="editFormOverlay">
                 <button
                     type="button"
                     className="backButton"
-                    onClick={props.goHome}
+                    onClick={closeForm}
                 >
-                    Go back
+                    Close form
                 </button>
-                <div className="form">
+                <div className="editForm">
                     <h1>Edit Packing Checklist</h1>
                     <h2>Edit your holiday details</h2>
                     <form onSubmit={handleSubmit}>
-                        <div className="form-box">
+                        <div className="edit-form-box">
                             <p>
                                 <label htmlFor="destination">
                                     Destination:
@@ -191,7 +195,6 @@ export const EditForm = (props) => {
                         </div>
                     </form>
                 </div>
-                <div className="form-image-side"></div>
             </div>
         </div>
     );
