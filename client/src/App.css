@@ -85,7 +85,17 @@ button {
   padding: 20px;
 }
 
-.main-box, .templates-box {
+.main-box {
+  display: grid;
+  gap: 100px; 
+  grid-template-columns: repeat(1, 1fr);
+  margin-inline: auto;
+  padding: 20px;
+  padding-bottom: 100px;
+  max-width: 1000px;
+} 
+
+.templates-box {
   display: grid;
   gap: 50px; 
   grid-template-columns: repeat(1, 1fr);
