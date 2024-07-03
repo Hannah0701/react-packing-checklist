@@ -37,7 +37,7 @@ button {
   border-radius: 6px;
 }
 
-.main, .templates, .content, .outputPage, .holidays {
+.main, .templates, .content, .outputPage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -341,7 +341,7 @@ input, select {
 }
 
 @media (min-width: 1024px) {
-  .templates-box, .holiday-box {
+  .templates-box {
     grid-template-columns: 1fr 1fr 1fr;
     align-items: start;
     padding-inline: 40px;
