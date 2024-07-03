@@ -9,13 +9,7 @@
     },
     {
       "src": "carry_on_bag_checked_logo.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "carry_on_bag_checked_logo.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "type": "image/png"
     }
   ],
   "start_url": ".",

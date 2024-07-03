@@ -38,6 +38,37 @@ export const Holidays = (props) => {
     }
   }
 
+  async function editHoliday(holidayId) {
+    try {
+      const resHoliday = await fetch(`${apiURL}/holidays/${holidayId}`, {
+        method: 'GET'
+      })
+      if (resHoliday.ok) {
+        const resHolidayMakers = await fetch(`${apiURL}/holidays/${holidayId}/holidayMakers`, {
+            method: 'GET'
+        })
+        if (resHolidayMakers.ok) {
+            const holidayData = await resHoliday.json();
+            const holidayMakersData = await resHolidayMakers.json();
+            const holidayDataWithMakers = {...holidayData, holidayMakers: holidayMakersData};
+            props.setSharedData({
+                destination: holidayDataWithMakers.destination,
+                holidayMakers: holidayDataWithMakers.holidayMakers,
+                holidayType: holidayDataWithMakers.holidayType,
+                duration: holidayDataWithMakers.duration
+            });
+            props.setEditForm(true);
+        } else {
+            throw new Error('Failed to fetch items');
+        }
+      } else { 
+          throw new Error('Failed to fetch items');
+      }
+    } catch (err) {
+      console.log('Oh no an error! ', err)
+    }
+  }
+
   async function deleteHoliday(holidayId) {
     try {
       const res = await fetch(`${apiURL}/holidays/${holidayId}`, {
@@ -108,6 +139,7 @@ export const Holidays = (props) => {
             {holidays.map(holiday => <Holiday holiday={holiday} 
                                               confirmDelete={confirmDelete} 
                                               viewChecklist={viewChecklist} 
+                                              editHoliday={editHoliday}
                                               setIsOutputPage={props.setIsOutputPage} 
                                               setIsHolidaysPage={props.setIsHolidaysPage} 
                                               setSharedData={props.setSharedData}

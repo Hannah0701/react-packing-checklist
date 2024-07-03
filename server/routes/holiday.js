@@ -91,7 +91,11 @@ async (req,res,next) => {
       res.status(400).json({ errors: errors.array() });
     } else {
       const updateHoliday = await Holiday.findByPk(req.params.id);
-       await updateHoliday.update(req.body);
+      // update associated holiday makers when updating holiday
+      await updateHoliday.setHolidayMakers([]);
+      req.body.holidayMakers.forEach(async (holidayMaker) => {
+        await updateHoliday.createHolidayMaker(holidayMaker);
+      });
       res.status(214).json(updateHoliday);
     }
   } catch(error) {

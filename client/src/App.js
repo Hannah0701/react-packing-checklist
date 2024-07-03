@@ -14,6 +14,7 @@ function App() {
   const [isTemplatesPage, setIsTemplatesPage] = useState(false);
   const [isOutputPage, setIsOutputPage] = useState(false);
   const [isHolidaysPage, setIsHolidaysPage] = useState(false);
+  const [editForm, setEditForm] = useState(false);
   const [sharedData, setSharedData] = useState(null);
   const [holidays, setHolidays] = useState([]);
 
@@ -126,6 +127,8 @@ function App() {
           setSharedData={setSharedData}
           setIsHolidaysPage={setIsHolidaysPage}
           setIsOutputPage={setIsOutputPage}
+          editForm={editForm}
+          setEditForm={setEditForm}
         />
         <Footer />
       </div>
