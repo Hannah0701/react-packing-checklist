@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import apiURL from '../api';
 import { Holiday } from './Holiday';
-import { EditForm } from './EditForm';
 
 export const Holidays = (props) => {
   const [holidays, setHolidays] = useState([]);
@@ -28,37 +27,6 @@ export const Holidays = (props) => {
             });
             props.setIsHolidaysPage(false);
             props.setIsOutputPage(true);
-        } else {
-            throw new Error('Failed to fetch items');
-        }
-      } else { 
-          throw new Error('Failed to fetch items');
-      }
-    } catch (err) {
-      console.log('Oh no an error! ', err)
-    }
-  }
-
-  async function editHoliday(holidayId) {
-    try {
-      const resHoliday = await fetch(`${apiURL}/holidays/${holidayId}`, {
-        method: 'GET'
-      })
-      if (resHoliday.ok) {
-        const resHolidayMakers = await fetch(`${apiURL}/holidays/${holidayId}/holidayMakers`, {
-            method: 'GET'
-        })
-        if (resHolidayMakers.ok) {
-            const holidayData = await resHoliday.json();
-            const holidayMakersData = await resHolidayMakers.json();
-            const holidayDataWithMakers = {...holidayData, holidayMakers: holidayMakersData};
-            props.setSharedData({
-                destination: holidayDataWithMakers.destination,
-                holidayMakers: holidayDataWithMakers.holidayMakers,
-                holidayType: holidayDataWithMakers.holidayType,
-                duration: holidayDataWithMakers.duration
-            });
-            props.setEditForm(true);
         } else {
             throw new Error('Failed to fetch items');
         }
@@ -115,23 +83,6 @@ export const Holidays = (props) => {
       fetchHolidays();
   } ,[]);
 
-  if (props.editForm) {
-    return (
-      <div className="editform-container">
-      {holidays.map(holiday =>
-        <EditForm holiday={holiday}
-                setEditForm={props.setEditForm}
-                sharedData={props.sharedData}
-                setSharedData={props.setSharedData}
-                setIsHolidaysPage={props.setIsHolidaysPage}
-                setIsOutputPage={props.setIsOutputPage} 
-                key={"editForm" + holiday.id}
-        />
-       )}
-      </div>
-    )
-  }
-
   return ( 
     <div className="holiday-page">
       <button 
@@ -152,9 +103,9 @@ export const Holidays = (props) => {
             <Holiday holiday={holiday} 
                      confirmDelete={confirmDelete} 
                      viewChecklist={viewChecklist} 
-                     editHoliday={editHoliday}
                      setIsOutputPage={props.setIsOutputPage} 
                      setIsHolidaysPage={props.setIsHolidaysPage} 
+                     sharedData={props.setSharedData}
                      setSharedData={props.setSharedData}
                      key={"holiday" + holiday.id}
             />

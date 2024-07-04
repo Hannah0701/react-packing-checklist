@@ -6,8 +6,10 @@ import camping from "../assets/camping.png";
 import adventure from "../assets/adventure.png";
 import multiDestination from "../assets/multiDestination.png";
 import person from "../assets/person.png";
+import {EditForm} from "./EditForm";
 
 export const Holiday = ({ holiday, ...props }) => {
+        const [editForm, setEditForm] = useState(false);
         const [holidayMakers, setHolidayMakers] = useState([]);
 
         useEffect(() => {
@@ -29,6 +31,37 @@ export const Holiday = ({ holiday, ...props }) => {
             fetchHolidayMakers();
         }, [holiday.id]);
 
+        async function editHoliday(holidayId) {
+          try {
+            const resHoliday = await fetch(`${apiURL}/holidays/${holidayId}`, {
+              method: 'GET'
+            })
+            if (resHoliday.ok) {
+              const resHolidayMakers = await fetch(`${apiURL}/holidays/${holidayId}/holidayMakers`, {
+                  method: 'GET'
+              })
+              if (resHolidayMakers.ok) {
+                  const holidayData = await resHoliday.json();
+                  const holidayMakersData = await resHolidayMakers.json();
+                  const holidayDataWithMakers = {...holidayData, holidayMakers: holidayMakersData};
+                  props.setSharedData({
+                      destination: holidayDataWithMakers.destination,
+                      holidayMakers: holidayDataWithMakers.holidayMakers,
+                      holidayType: holidayDataWithMakers.holidayType,
+                      duration: holidayDataWithMakers.duration
+                  });
+                  setEditForm(true);
+              } else {
+                  throw new Error('Failed to fetch items');
+              }
+            } else { 
+                throw new Error('Failed to fetch items');
+            }
+          } catch (err) {
+            console.log('Oh no an error! ', err)
+          }
+        }
+
         let imageType;
         if (holiday.holidayType === "city") {
           imageType = city;
@@ -40,6 +73,21 @@ export const Holiday = ({ holiday, ...props }) => {
           imageType = multiDestination;
         } else {
           imageType = beach;
+        }
+
+        if (editForm) {
+          return (
+            <div className="editform-container">
+              <EditForm holiday={holiday}
+                      setEditForm={setEditForm}
+                      setSharedData={props.setSharedData}
+                      setIsHolidaysPage={props.setIsHolidaysPage}
+                      setIsOutputPage={props.setIsOutputPage} 
+                      holidayMakers={holidayMakers}
+                      key={"editForm" + holiday.id}
+              />
+            </div>
+          )
         }
 
         return (
@@ -69,7 +117,7 @@ export const Holiday = ({ holiday, ...props }) => {
               </button>
               <button 
                 className='editButton' 
-                onClick={() => props.editHoliday(holiday.id)}
+                onClick={() => editHoliday(holiday.id)}
               >
                   Edit
               </button>

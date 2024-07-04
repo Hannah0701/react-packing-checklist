@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import apiURL from '../api';
 
 export const EditForm = (props) => {
-    const [numPeople, setNumPeople] = useState(props.sharedData.holidayMakers.length);
+    const [numPeople, setNumPeople] = useState(props.holidayMakers.length);
     const [data, setData] = useState({
-        destination: props.sharedData.destination,
-        holidayMakers: props.sharedData.holidayMakers,
-        holidayType: props.sharedData.holidayType,
-        duration: props.sharedData.duration,
+        destination: props.holiday.destination,
+        holidayMakers: props.holidayMakers,
+        holidayType: props.holiday.holidayType,
+        duration: props.holiday.duration,
     });
 
     function closeForm() {
