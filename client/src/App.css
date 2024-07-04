@@ -491,26 +491,19 @@ label {
   top: 50%;
   left: 50%;
   width: 50%;
+  height: 90%;
   transform: translate(-50%, -50%);
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.253);
   padding: 28px;
   border-radius: 8px;
   z-index: 999;
+  overflow-y: scroll;
 }
 
 @media (max-width: 500px) {
   .editFormOverlay {
-    position: fixed;
-    top: 50%;
-    left: 50%;
     width: 95%;
-    transform: translate(-50%, -50%);
-    background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.253);
-    padding: 28px;
-    border-radius: 8px;
-    z-index: 999;
   }
 }
 
