@@ -115,7 +115,7 @@ export const Templates = (props) => {
             <div className="templates-box">
               <div className="template">  
                 <div className='two-to-four-checklist-box'>
-                  <button className="two-to-four-box-button" onClick={handleClickTwoDay} width="150px" height="150px" border-radius="20px" ></button>
+                  <button className="two-to-four-box-button" onClick={handleClickTwoDay} ></button>
                   <div className="template-details">
                     <h3>2-4 Day Checklist</h3>
                     <p>Generic 2 - 4 day holiday packing checklist</p>

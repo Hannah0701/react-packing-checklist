@@ -85,7 +85,17 @@ button {
   padding: 20px;
 }
 
-.main-box, .templates-box {
+.main-box {
+  display: grid;
+  gap: 100px; 
+  grid-template-columns: repeat(1, 1fr);
+  margin-inline: auto;
+  padding: 20px;
+  padding-bottom: 100px;
+  max-width: 1000px;
+} 
+
+.templates-box {
   display: grid;
   gap: 50px; 
   grid-template-columns: repeat(1, 1fr);
@@ -463,4 +473,36 @@ label {
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 4px 4px rgba(242, 149, 68, 0.25);
+}
+
+.overlay {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, rgba(247, 73, 168, 0.10), rgb(247, 176, 114, 0.10));
+  z-index: 998;
+}
+
+.editFormOverlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.253);
+  padding: 28px;
+  border-radius: 8px;
+  z-index: 999;
+}
+
+.editForm {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

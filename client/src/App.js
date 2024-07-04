@@ -14,6 +14,7 @@ function App() {
   const [isTemplatesPage, setIsTemplatesPage] = useState(false);
   const [isOutputPage, setIsOutputPage] = useState(false);
   const [isHolidaysPage, setIsHolidaysPage] = useState(false);
+  const [editForm, setEditForm] = useState(false);
   const [sharedData, setSharedData] = useState(null);
   const [holidays, setHolidays] = useState([]);
 
@@ -36,6 +37,7 @@ function App() {
     setIsTemplatesPage(false)
     setIsOutputPage(false)
     setIsHolidaysPage(false)
+    setEditForm(false)
     setSharedData(null)
   }
 
@@ -44,6 +46,7 @@ function App() {
     setIsTemplatesPage(false)
     setIsOutputPage(false)
     setIsHolidaysPage(true)
+    setEditForm(false)
     setSharedData(null)
   }
 
@@ -123,9 +126,12 @@ function App() {
         <Holidays  
           goHome={goHome}
           fetchHolidays={fetchHolidays}
+          sharedData={sharedData}
           setSharedData={setSharedData}
           setIsHolidaysPage={setIsHolidaysPage}
           setIsOutputPage={setIsOutputPage}
+          editForm={editForm}
+          setEditForm={setEditForm}
         />
         <Footer />
       </div>

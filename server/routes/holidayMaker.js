@@ -13,6 +13,8 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// /api/holidayMakers/:id/holidays
+
 // GET /api/holidayMakers/:id
 router.get("/:id", async (req, res, next) => {
   try {

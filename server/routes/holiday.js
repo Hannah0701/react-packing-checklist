@@ -1,39 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { Holiday } = require("../models");
+const { Holiday, HolidayMaker } = require("../models");
 const { check, validationResult } = require("express-validator");
 
-// GET holiday with holidayMakers /api/holidays
+// GET all holidays /api/holidays
 router.get("/", async (req, res, next) => {
   try {
     const holidays = await Holiday.findAll();
-    // await Promise.all(holidays.map(async (holiday) => {
-    //   holiday.holidayMakers = await holiday.getHolidayMakers();
-    // }));
 
     res.send(holidays);
   } catch (error) {
     next(error);
   }
 });
-
-// /api/holidays/:id/holidayMakers
-router.get("/:id/holidayMakers", async (req, res, next) => {
-  try {
-    const holidayId = req.params.id;
-    const holiday = await Holiday.findByPk(holidayId);
-    if (holiday) {
-      const holidayMakers = await holiday.getHolidayMakers();
-      res.send(holidayMakers);
-    } else {
-      res.status(404).send({ error: "Item not found"});
-    }
-  } catch (error) {
-    next(error);
-  }
-});
-
-// /api/holidayMakers/:id/holidays
 
 // GET /api/holidays/:id
 router.get("/:id", async (req, res, next) => {
@@ -50,6 +29,22 @@ router.get("/:id", async (req, res, next) => {
     next(error);
   }
 }); 
+
+// /api/holidays/:id/holidayMakers
+router.get("/:id/holidayMakers", async (req, res, next) => {
+  try {
+    const holidayId = req.params.id;
+    const holiday = await Holiday.findByPk(holidayId);
+    if (holiday) {
+      const holidayMakers = await holiday.getHolidayMakers();
+      res.send(holidayMakers);
+    } else {
+      res.status(404).send({ error: "Item not found"});
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.use(express.json());
 router.use(express.urlencoded({extended: true}))
@@ -91,7 +86,18 @@ async (req,res,next) => {
       res.status(400).json({ errors: errors.array() });
     } else {
       const updateHoliday = await Holiday.findByPk(req.params.id);
-       await updateHoliday.update(req.body);
+      await updateHoliday.update(req.body);
+      if (req.body.holidayMakers) {
+        req.body.holidayMakers.forEach(async (holidayMaker) => {
+          if (holidayMaker.id) {
+            const updateHolidayMaker = await HolidayMaker.findByPk(holidayMaker.id);
+            await updateHolidayMaker.update(holidayMaker);
+          } else {
+            await updateHoliday.createHolidayMaker(holidayMaker);
+          }
+        });
+      }
+
       res.status(214).json(updateHoliday);
     }
   } catch(error) {
