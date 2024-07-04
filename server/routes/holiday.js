@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Holiday } = require("../models");
+const { Holiday, HolidayMaker } = require("../models");
 const { check, validationResult } = require("express-validator");
 
 // GET all holidays /api/holidays
@@ -86,11 +86,18 @@ async (req,res,next) => {
       res.status(400).json({ errors: errors.array() });
     } else {
       const updateHoliday = await Holiday.findByPk(req.params.id);
-      // update associated holiday makers when updating holiday
-      await updateHoliday.setHolidayMakers([]);
-      req.body.holidayMakers.forEach(async (holidayMaker) => {
-        await updateHoliday.createHolidayMaker(holidayMaker);
-      });
+      await updateHoliday.update(req.body);
+      if (req.body.holidayMakers) {
+        req.body.holidayMakers.forEach(async (holidayMaker) => {
+          if (holidayMaker.id) {
+            const updateHolidayMaker = await HolidayMaker.findByPk(holidayMaker.id);
+            await updateHolidayMaker.update(holidayMaker);
+          } else {
+            await updateHoliday.createHolidayMaker(holidayMaker);
+          }
+        });
+      }
+
       res.status(214).json(updateHoliday);
     }
   } catch(error) {

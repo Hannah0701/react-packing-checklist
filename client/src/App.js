@@ -126,6 +126,7 @@ function App() {
         <Holidays  
           goHome={goHome}
           fetchHolidays={fetchHolidays}
+          sharedData={sharedData}
           setSharedData={setSharedData}
           setIsHolidaysPage={setIsHolidaysPage}
           setIsOutputPage={setIsOutputPage}

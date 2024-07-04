@@ -123,6 +123,8 @@ export const Holidays = (props) => {
                 setEditForm={props.setEditForm}
                 sharedData={props.sharedData}
                 setSharedData={props.setSharedData}
+                setIsHolidaysPage={props.setIsHolidaysPage}
+                setIsOutputPage={props.setIsOutputPage} 
                 key={"editForm" + holiday.id}
         />
        )}

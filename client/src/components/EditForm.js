@@ -1,37 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import apiURL from '../api';
 
 export const EditForm = (props) => {
-    const [numPeople, setNumPeople] = useState(1);
+    const [numPeople, setNumPeople] = useState(props.sharedData.holidayMakers.length);
     const [data, setData] = useState({
-        destination: '',
-        holidayMakers: [{
-            name: '',
-            age: ''
-        }],
-        holidayType: 'beach',
-        duration: '',
+        destination: props.sharedData.destination,
+        holidayMakers: props.sharedData.holidayMakers,
+        holidayType: props.sharedData.holidayType,
+        duration: props.sharedData.duration,
     });
-
-    useEffect(() => {
-        // Fetch the holiday data and prepopulate the form
-        const fetchHolidayData = async () => {
-            try {
-                const response = props.sharedData
-                if (response.ok) {
-                    const holidayData = await response.json();
-                    setData(holidayData);
-                    setNumPeople(holidayData.holidayMakers.length);
-                } else {
-                    console.log('Failed to fetch holiday data');
-                }
-            } catch (error) {
-                console.log('Error fetching holiday data:', error);
-            }
-        };
-
-        fetchHolidayData();
-    }, [props.sharedData]);
 
     function closeForm() {
       props.setEditForm(false)
@@ -53,30 +30,6 @@ export const EditForm = (props) => {
         });
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        props.setIsHolidaysPage(false);
-        props.setIsOutputPage(true);
-        props.setSharedData(data);
-
-        try {
-            const response = await fetch(`${apiURL}/holidays/${props.holidayId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-            if (!response.ok) {
-                console.log('Failed to update holiday and holiday makers');
-            } else {
-                console.log('Holiday and holiday makers updated');
-            }
-        } catch (error) {
-            console.log('Error updating holiday and holiday makers:', error);
-        }
-    };
-
     const handleNumPeopleChange = (e) => {
         const newNumPeople = parseInt(e.target.value);
         setNumPeople(newNumPeople);
@@ -93,6 +46,32 @@ export const EditForm = (props) => {
         } else {
             setData({ ...data, holidayMakers: data.holidayMakers.slice(0, newNumPeople) });
         }
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        props.setSharedData(data);
+
+        try {
+            const response = await fetch(`${apiURL}/holidays/${props.holiday.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            if (!response.ok) {
+                console.log('Failed to update holiday and holiday makers');
+            } else {
+                console.log('Holiday and holiday makers updated');
+            }
+        } catch (error) {
+            console.log('Error updating holiday and holiday makers:', error);
+        }
+
+        props.setIsHolidaysPage(false);
+        props.setEditForm(false)
+        props.setIsOutputPage(true);
     };
 
     return (
@@ -120,7 +99,7 @@ export const EditForm = (props) => {
                                     id="destination"
                                     value={data.destination}
                                     onChange={handleChange}
-                                    placeholder='A country or city e.g. Japan, Berlin, USA'
+                                    placeholder={data.destination ? data.destination : 'A country or city e.g. Japan, Berlin, USA'}
                                     required
                                 />
                             </p>
@@ -134,6 +113,7 @@ export const EditForm = (props) => {
                                     id="numPeople"
                                     value={numPeople}
                                     onChange={handleNumPeopleChange}
+                                    placeholder={numPeople}
                                     required
                                 />
                             </p>
@@ -145,7 +125,7 @@ export const EditForm = (props) => {
                                         name="name"
                                         value={maker.name}
                                         onChange={(e) => handleHolidayMakerChange(e, index)}
-                                        placeholder={`Person ${index + 1} name`}
+                                        placeholder={maker.name ? maker.name : `Person ${index + 1} name`}
                                         required
                                     />
                                     <input
@@ -153,7 +133,7 @@ export const EditForm = (props) => {
                                         name="age"
                                         value={maker.age}
                                         onChange={(e) => handleHolidayMakerChange(e, index)}
-                                        placeholder={`Person ${index + 1} age`}
+                                        placeholder={maker.age ? maker.age : `Person ${index + 1} age`}
                                         required
                                     />
                                 </div>
@@ -168,6 +148,7 @@ export const EditForm = (props) => {
                                     id="holidayType"
                                     value={data.holidayType}
                                     onChange={handleChange}
+                                    placeholder={data.holidayType ? data.holidayType : 'beach'}
                                     required
                                 >
                                     <option value="beach">Beach / resort holiday</option>
@@ -187,7 +168,7 @@ export const EditForm = (props) => {
                                     id="duration"
                                     value={data.duration}
                                     onChange={handleChange}
-                                    placeholder='Number of days e.g. 7, 14, 30'
+                                    placeholder={data.duration ? data.duration : 'Number of days e.g. 7, 14, 30'}
                                     required
                                 />
                             </p>
