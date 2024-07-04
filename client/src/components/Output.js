@@ -50,7 +50,15 @@ export const Output = (props) => {
     }, [props.sharedData.duration, props.sharedData.holidayType]);
 
     const getAgeBasedItems = (age) => {
-      let ageBasedItems = {};
+      let ageBasedItems = {
+        "Important": [],
+        "Clothing": [],
+        "Personal care": [],
+        "Electronics": [],
+        "Food": [],
+        "Entertainment": [],
+        "Miscellaneous": []
+      };
   
       if (age <= 2) {
       ageBasedItems["Miscellaneous"].push("Diapers", "Baby wipes");
